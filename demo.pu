@@ -1,0 +1,49 @@
+import streamlit as st
+import subprocess
+
+def main():
+    st.title("Navigation Menu")
+
+    # Define options
+    options = ["Disease Prediction", "Weather Prediction", "Information Guide"]
+
+    # Display radio buttons for options
+    selected_option = st.radio("Choose an option", options)
+
+    # Define correct username and password
+    correct_username = "sanika"
+    correct_password = "sanika"
+
+    # Create input fields for username and password
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    # Check if the username and password match
+    if st.button("Login"):
+        if username == correct_username and password == correct_password:
+            st.success("Login Successful!")
+            # Redirect based on selected option
+            if selected_option == "Disease Prediction":
+                run_disease_prediction_script()
+            elif selected_option == "Weather Prediction":
+                run_weather_prediction_script()
+            elif selected_option == "Information Guide":
+                run_info_chart_script()
+        else:
+            st.error("Invalid Username or Password")
+
+def run_disease_prediction_script():
+    st.title("Disease Prediction")
+    # Run the diseasepred.py script using subprocess
+    subprocess.run(["streamlit", "run", "diseasepred.py"])
+
+def run_weather_prediction_script():
+    st.title("Weather Prediction")
+    # You can add your weather prediction code here
+
+def run_info_chart_script():
+    st.title("Information Guide")
+    # You can add your code to open the information guide here
+
+if __name__ == "__main__":
+    main()
